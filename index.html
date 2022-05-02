@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Code Quiz</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -18,12 +19,20 @@
             View Highscores</div>
         <div class="row">
             <div id="currentTime"></div>
-            <div id="quiz">
-                <h1>Coding Challenge Quiz</h1>
-                <p>Try to answer the following code-related questions within the time limit. Keep in mind that
+            <section>
+                <h1 id="quizHeader">Coding Challenge Quiz</h1>
+                <p id="quizInfo">Try to answer the following code-related questions within the time limit. Keep in mind
+                    that
                     incorrect
                     answers will penalize your score/time by ten seconds.</p>
-            </div>
+            </section>
+
+            <section id="quiz" class="hidden">
+                <h3 class="questionInfo"></h3>
+                <div id="choices"></div>
+
+            </section>
+
             <div class="row">
                 <button class="start-button">Start Quiz</button>
             </div>
