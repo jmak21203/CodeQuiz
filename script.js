@@ -12,6 +12,7 @@ var quizHeader = document.getElementById("quizHeader");
 var quizInfo = document.getElementById("quizInfo");
 var choiceEl = document.getElementById("choices");
 var infoEl = document.querySelector(".questionInfo");
+var answerEl = document.getElementById("answer");
 
 var questions = [
     {
@@ -53,7 +54,7 @@ var questionList = document.createElement("ul");
 function startGame() {
     // isWin = false;
 
-    // startTimer()
+    startTimer()
     console.log("Start the game");
     quizHeader.style.display = "none";
     quizInfo.style.display = "none";
@@ -68,20 +69,12 @@ function startTimer() {
     // Sets timer
     timer = setInterval(function () {
         timerCount--;
-        timerElement.textContent = timerCount;
-        if (timerCount >= 0) {
-            // Tests if win condition is met
-            if (isWin && timerCount > 0) {
-                // Clears interval and stops timer
-                clearInterval(timer);
-                winGame();
-            }
+        if (timerCount <= 0) {
+            gameOver()
         }
         // Tests if time has run out
-        if (timerCount === 0) {
-            // Clears interval
-            clearInterval(timer);
-            loseGame();
+        else {
+            timerElement.textContent = "Timer: " + timerCount + " seconds";
         }
     }, 1000);
 }
@@ -106,6 +99,7 @@ function showQuestions() {
             choiceButton.innerText = choiceText;
             choiceButton.classList.add("btn", "btn-info");
             choiceEl.appendChild(choiceButton);
+
         }
         questionIndex++
     } else {
@@ -117,14 +111,44 @@ function showQuestions() {
 
 
 
-function compareChoice(userChoice) {
+function checkAnswer(buttonEl) {
+
+
+    var userAnswer = buttonEl.innerText;
+
+
+    var questionObject = questions[questionIndex - 1];
+    var correctAnswer = questionObject.answer;
+
+
+    if (userAnswer === correctAnswer) {
+        score += 5;
+        answerEl.innerText = "Correct";
+    } else {
+        timerCount -= 5;
+        answerEl.innerText = "Wrong";
+    }
+
     //make some logic if correct
 
     //else make some logic if incorrect
 
     //display next question
 
-    showQuestions()
+    showQuestions();
 }
 
+function gameOver() {
+    //
+}
+
+
+
+
 startButton.addEventListener("click", startGame);
+choiceEl.addEventListener("click", function (event) {
+    // ignore if target isn't a button
+    if (event.target.nodeName === "BUTTON") {
+        checkAnswer(event.target);
+    }
+});
