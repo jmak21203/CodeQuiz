@@ -13,31 +13,56 @@
 <body>
 
 
+    <header>
+
+
+        <a href="#" id="highscores-header">
+            View Highscores</a>
+
+
+        <div id="currentTime"></div>
+    </header>
     <main>
+        <section id="start">
+            <h1 id="quizHeader">Coding Challenge Quiz</h1>
+            <p id="quizInfo">Try to answer the following code-related questions within the time limit. Keep in mind
+                that
+                incorrect
+                answers will penalize your score/time by ten seconds.</p>
+            <button class="start-button">Start Quiz</button>
+        </section>
 
-        <div id="highscores">
-            View Highscores</div>
-        <div class="row">
-            <div id="currentTime"></div>
-            <section>
-                <h1 id="quizHeader">Coding Challenge Quiz</h1>
-                <p id="quizInfo">Try to answer the following code-related questions within the time limit. Keep in mind
-                    that
-                    incorrect
-                    answers will penalize your score/time by ten seconds.</p>
-            </section>
+        <section id="quiz" class="hide">
+            <h3 class="questionInfo"></h3>
+            <div id="choices"></div>
+            <div id="answer"></div>
 
-            <section id="quiz" class="hidden">
-                <h3 class="questionInfo"></h3>
-                <div id="choices"></div>
-                <div id="answer"></div>
+        </section>
 
-            </section>
+        <section id="gameover" class="hide">
 
-            <div class="row">
-                <button class="start-button">Start Quiz</button>
+            <h3 class="heading">All Done!</h3>
+            <p class="final-score"></p>
+            <form class="scores">
+                <input id="username" placeholder="Enter Name Here"></input>
+                <button type="submit" class="btn btn-info score-button" value="Submit">Save Score</button>
+            </form>
+        </section>
+
+        <section id="highscores" class="hide">
+            <h3 class="heading">Highscores</h3>
+            <ul class="highscores-list">
+            </ul>
+            <div class="highscore-button">
+                <button class="btn btn-info play-again">Play Again</button>
+                <button class="btn btn-info clear-scores">Clear Highscores</button>
             </div>
-        </div>
+        </section>
+
+        <!-- <div class="row">
+
+        </div> -->
+
 
     </main>
     <script src="script.js"></script>
