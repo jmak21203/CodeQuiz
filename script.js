@@ -53,14 +53,14 @@ var questionIndex = 0;
 var timerCount = 75;
 var time = questions.length * 15;
 
-function init() {
-    highScores.style.display = "none";
-    quizHeader.style.display = "show";
-    quizInfo.style.display = "show";
-    startButton.style.display = "show";
-    startButton.addEventListener("click", startGame);
-    startGame();
-}
+// function init() {
+//     highScores.style.display = "none";
+//     quizHeader.style.display = "show";
+//     quizInfo.style.display = "show";
+//     startButton.style.display = "show";
+//     startButton.addEventListener("click", startGame);
+//     startGame();
+// }
 //function to start the game on button click
 function startGame() {
     score = 0;
@@ -71,7 +71,7 @@ function startGame() {
     startButton.style.display = "none";
     // highScores.style.display = "none";
     // gameOver2.style.display = "none";
-    document.querySelector("#highScores").classList.add("hidden");
+    document.querySelector("#highscores").classList.add("hidden");
     document.querySelector("#quiz").classList.remove("hidden");
     showQuestions();
 }
@@ -91,6 +91,7 @@ function startTimer() {
 }
 //function to show cycle questions
 function showQuestions() {
+    console.log("this function has been called");
     if (questionIndex < questions.length) {
         var questionObject = questions[questionIndex];
         var userQuestion = questionObject.title;
@@ -188,9 +189,3 @@ submitBtn.addEventListener("click", function (event) {
     Highscores();
 });
 highScoreButton.addEventListener("click", Highscores);
-choiceEl.addEventListener("click", function (event) {
-    // ignore if target isn't a button
-    if (event.target.nodeName === "BUTTON") {
-        checkAnswer(event.target);
-    }
-});
