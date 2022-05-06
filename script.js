@@ -3,7 +3,6 @@
 //when user answers question incorrect, subtract time from timer
 //when no questions left or timer is 0, game over
 //user can save initials and score(time)
-
 var startButton = document.querySelector(".start-button");
 var timerElement = document.querySelector("#currentTime");
 var quizElement = document.querySelector("#quiz");
@@ -13,7 +12,7 @@ var quizInfo = document.getElementById("quizInfo");
 var choiceEl = document.getElementById("choices");
 var infoEl = document.querySelector(".questionInfo");
 var answerEl = document.getElementById("answer");
-var gameOver = document.querySelector("#gameover");
+var gameOver2 = document.querySelector("#gameover");
 var highScores = document.querySelector("#highscores");
 var clearScores = document.querySelector(".clear-scores");
 var highScoreButton = document.querySelector("#highscore-button");
@@ -22,7 +21,6 @@ var submitScoreEl = document.querySelector(".score-button");
 var highScoresEl = document.querySelector(".highscores-list");
 var userName = document.querySelector("#username");
 var submitBtn = document.querySelector(".score-button");
-
 var questions = [
     {
         title: "Commonly used data types DO NOT include:",
@@ -49,9 +47,7 @@ var questions = [
         choices: ["Javascript", "terminal / bash", "for loops", "console log"],
         answer: "console log"
     },
-
 ];
-
 var score = 0;
 var timer;
 var questionIndex = 0;
@@ -70,20 +66,18 @@ function init() {
 //function to start the game on button click
 function startGame() {
     // isWin = false;
-
     startTimer()
     console.log("Start the game");
     quizHeader.style.display = "none";
     quizInfo.style.display = "none";
     startButton.style.display = "none";
-    highScores.style.display = "none";
-    gameOver.style.display = "none";
-
+    // highScores.style.display = "none";
+    // gameOver2.style.display = "none";
+    document.querySelector("#highScores").classList.add("hidden");
+    document.querySelector("#quiz").classList.remove("hidden");
     showQuestions();
 }
-
 //timer function starts the timer
-
 function startTimer() {
     // Sets timer
     timer = setInterval(function () {
@@ -97,50 +91,30 @@ function startTimer() {
         }
     }, 1000);
 }
-
-
-
 //function to show cycle questions
 function showQuestions() {
-
     if (questionIndex < questions.length) {
-
         var questionObject = questions[questionIndex];
         var userQuestion = questionObject.title;
         infoEl.innerText = userQuestion;
-
         var userChoices = questionObject.choices;
         choiceEl.innerHTML = "";
-
         for (var i = 0; i < userChoices.length; i++) {
             var choiceText = userChoices[i];
             var choiceButton = document.createElement("button");
             choiceButton.innerText = choiceText;
             choiceButton.classList.add("btn", "btn-info");
             choiceEl.appendChild(choiceButton);
-
         }
         questionIndex++
-
     } else {
         gameOver()
-
     }
-
 }
-
-
-
 function checkAnswer(buttonEl) {
-
-
     var userAnswer = buttonEl.innerText;
-
-
     var questionObject = questions[questionIndex - 1];
     var correctAnswer = questionObject.answer;
-
-
     if (userAnswer === correctAnswer) {
         score += 5;
         answerEl.innerText = "Correct";
@@ -148,50 +122,37 @@ function checkAnswer(buttonEl) {
         timerCount -= 5;
         answerEl.innerText = "Wrong";
     }
-
     //make some logic if correct
-
     //else make some logic if incorrect
-
     //display next question
-
     showQuestions();
-
 }
-
 function gameOver() {
     //ends game
-
     // // stop timer
     clearInterval(timer);
-
-    // // show end screen
-    // var highscoreSectionEl = document.querySelector("#gameover");
-    // highscoreSectionEl.setAttribute("class", "show");
-
-    // // show final score
-    // var finalScoreEl = document.querySelector(".final-score");
-    // finalScoreEl.textContent = time;
-
+    // show end screen
+    var highscoreSectionEl = document.querySelector("#gameover");
+    highscoreSectionEl.setAttribute("class", "show");
+    // show final score
+    var finalScoreEl = document.querySelector(".final-score");
+    finalScoreEl.textContent = time;
     // hide questions section
     quizElement.style.display = "none";
     choiceEl.style.display = "none";
+    // document.querySelector(".highScores").classList.remove("hide");
 }
-
-
 function checkForEnter(event) {
     // "13" represents the enter key
     if (event.key === "Enter") {
         saveHighscore();
     }
 }
-
 function Highscores() {
     viewHighscoresButton.disabled = true;
     timerElement.hidden = true;
-
     var highscores = JSON.parse(localStorage.getItem("highscores"));
-    highscoresEl.innerHTML = "";
+    highScoresEl.innerHTML = "";
     for (var i = 0; i < highscores.length; i++) {
         var highscoreObject = highscores[i];
         //create element to render on highscores page
@@ -200,19 +161,12 @@ function Highscores() {
         highscoresEl.appendChild(listItem);
     }
 }
-
 function clearHighscores() {
     window.localStorage.removeItem("highscores");
     window.location.reload();
 }
-
-
 clearScores.addEventListener("click", clearHighscores);
-
-
-
 // user clicks button to submit initials
-
 startButton.addEventListener("click", startGame);
 choiceEl.addEventListener("click", function (event) {
     // ignore if target isn't a button
@@ -223,11 +177,9 @@ choiceEl.addEventListener("click", function (event) {
 submitBtn.addEventListener("click", function (event) {
     event.preventDefault();
     let highscores = JSON.parse(localStorage.getItem("highscores"));
-
     if (highscores == null) {
         highscores = [];
     }
-
     highscores.push(
         {
             name: document.querySelector("#name-input").value,
@@ -239,7 +191,6 @@ submitBtn.addEventListener("click", function (event) {
     document.querySelector("#username").textContent = "";
     renderHighscores();
 });
-
 highScoreButton.addEventListener("click", Highscores);
 choiceEl.addEventListener("click", function (event) {
     // ignore if target isn't a button
