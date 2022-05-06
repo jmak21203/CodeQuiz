@@ -53,14 +53,7 @@ var questionIndex = 0;
 var timerCount = 75;
 var time = questions.length * 15;
 
-function init() {
-    highScores.style.display = "none";
-    quizHeader.style.display = "show";
-    quizInfo.style.display = "show";
-    startButton.style.display = "show";
-    startButton.addEventListener("click", startGame);
 
-}
 //function to start the game on button click
 function startGame() {
     score = 0;
@@ -165,7 +158,7 @@ function clearHighscores() {
 }
 clearScores.addEventListener("click", clearHighscores);
 playAgain.addEventListener("click", function () {
-    window.location = "google.com";
+    window.location = "https://jmak21203.github.io/CodeQuiz/";
 });
 // user clicks button to submit initials
 startButton.addEventListener("click", startGame);
