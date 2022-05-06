@@ -15,7 +15,7 @@ var answerEl = document.getElementById("answer");
 var gameOver2 = document.querySelector("#gameover");
 var highScores = document.querySelector("#highscores");
 var clearScores = document.querySelector(".clear-scores");
-var highScoreButton = document.querySelector("#highscore-button");
+var highScoreButton = document.querySelector(".highscore-button");
 var playAgain = document.querySelector(".play-again");
 var submitScoreEl = document.querySelector(".score-button");
 var highScoresEl = document.querySelector(".highscores-list");
@@ -147,8 +147,8 @@ function checkForEnter(event) {
     }
 }
 function Highscores() {
-    viewHighscoresButton.disabled = true;
     timerElement.hidden = true;
+    highScoreButton.disabled = true;
     var highscores = JSON.parse(localStorage.getItem("highscores"));
     highScoresEl.innerHTML = "";
     for (var i = 0; i < highscores.length; i++) {
@@ -180,7 +180,7 @@ submitBtn.addEventListener("click", function (event) {
     }
     highscores.push(
         {
-            name: document.querySelector("#name-input").value,
+            name: document.querySelector("#username").value,
             highscore: score,
         }
     );
