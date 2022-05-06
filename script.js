@@ -6,7 +6,6 @@
 var startButton = document.querySelector(".start-button");
 var timerElement = document.querySelector("#currentTime");
 var quizElement = document.querySelector("#quiz");
-var questionList = document.getElementById("questionlist");
 var quizHeader = document.getElementById("quizHeader");
 var quizInfo = document.getElementById("quizInfo");
 var choiceEl = document.getElementById("choices");
@@ -52,7 +51,6 @@ var score = 0;
 var timer;
 var questionIndex = 0;
 var timerCount = 75;
-var questionList = document.createElement("ul");
 var time = questions.length * 15;
 
 function init() {
