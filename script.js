@@ -65,7 +65,7 @@ function init() {
 }
 //function to start the game on button click
 function startGame() {
-    // isWin = false;
+    score = 0;
     startTimer()
     console.log("Start the game");
     quizHeader.style.display = "none";
@@ -134,9 +134,7 @@ function gameOver() {
     // show end screen
     var highscoreSectionEl = document.querySelector("#gameover");
     highscoreSectionEl.setAttribute("class", "show");
-    // show final score
-    var finalScoreEl = document.querySelector(".final-score");
-    finalScoreEl.textContent = time;
+    document.querySelector(".final-score").innerText = "Thanks for Playing! Final Score " + score + " points!";
     // hide questions section
     quizElement.style.display = "none";
     choiceEl.style.display = "none";
@@ -158,7 +156,7 @@ function Highscores() {
         //create element to render on highscores page
         var listItem = document.createElement("li");
         listItem.innerText = highscoreObject.name + " - " + highscoreObject.highscore;
-        highscoresEl.appendChild(listItem);
+        highScoresEl.appendChild(listItem);
     }
 }
 function clearHighscores() {
@@ -189,7 +187,7 @@ submitBtn.addEventListener("click", function (event) {
     localStorage.setItem("highscores", JSON.stringify(highscores));
     // clear the name input field after
     document.querySelector("#username").textContent = "";
-    renderHighscores();
+    Highscores();
 });
 highScoreButton.addEventListener("click", Highscores);
 choiceEl.addEventListener("click", function (event) {
