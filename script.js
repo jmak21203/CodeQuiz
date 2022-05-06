@@ -53,14 +53,14 @@ var questionIndex = 0;
 var timerCount = 75;
 var time = questions.length * 15;
 
-// function init() {
-//     highScores.style.display = "none";
-//     quizHeader.style.display = "show";
-//     quizInfo.style.display = "show";
-//     startButton.style.display = "show";
-//     startButton.addEventListener("click", startGame);
-//     startGame();
-// }
+function init() {
+    highScores.style.display = "none";
+    quizHeader.style.display = "show";
+    quizInfo.style.display = "show";
+    startButton.style.display = "show";
+    startButton.addEventListener("click", startGame);
+
+}
 //function to start the game on button click
 function startGame() {
     score = 0;
@@ -148,7 +148,8 @@ function checkForEnter(event) {
 function Highscores() {
     timerElement.hidden = true;
     highScoreButton.disabled = true;
-    var highscores = JSON.parse(localStorage.getItem("highscores"));
+    document.querySelector("#highscores").classList.remove("hidden");
+    var highscores = JSON.parse(localStorage.getItem("highScores"));
     highScoresEl.innerHTML = "";
     for (var i = 0; i < highscores.length; i++) {
         var highscoreObject = highscores[i];
@@ -159,10 +160,13 @@ function Highscores() {
     }
 }
 function clearHighscores() {
-    window.localStorage.removeItem("highscores");
+    window.localStorage.removeItem("highScores");
     window.location.reload();
 }
 clearScores.addEventListener("click", clearHighscores);
+playAgain.addEventListener("click", function () {
+    window.location = "google.com";
+});
 // user clicks button to submit initials
 startButton.addEventListener("click", startGame);
 choiceEl.addEventListener("click", function (event) {
@@ -173,7 +177,7 @@ choiceEl.addEventListener("click", function (event) {
 });
 submitBtn.addEventListener("click", function (event) {
     event.preventDefault();
-    let highscores = JSON.parse(localStorage.getItem("highscores"));
+    let highscores = JSON.parse(localStorage.getItem("highScores"));
     if (highscores == null) {
         highscores = [];
     }
@@ -183,9 +187,10 @@ submitBtn.addEventListener("click", function (event) {
             highscore: score,
         }
     );
-    localStorage.setItem("highscores", JSON.stringify(highscores));
+    localStorage.setItem("highScores", JSON.stringify(highscores));
     // clear the name input field after
     document.querySelector("#username").textContent = "";
     Highscores();
 });
+
 highScoreButton.addEventListener("click", Highscores);
